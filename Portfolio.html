@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aswin's Portfolio | VIT Student</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3a506b;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #3a506b;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #6c63ff;
+        }
+        
+        .header {
+            padding: 100px 20px;
+            text-align: center;
+            background: linear-gradient(rgba(184, 86, 199, 0.5), rgba(210, 192, 213, 0.5)), url('/api/placeholder/1200/400') center/cover no-repeat;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .header-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #6c63ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .header-btn:hover {
+            transform: translateY(-3px);
+            background-color: #5a52d5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: #4e6c92;
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            z-index: -1;
+            border-radius: 12px;
+        }
+        
+        .project-card:nth-child(1)::before {
+            background-color: #ff6b6b; /* Whitewashed red */
+        }
+        
+        .project-card:nth-child(2)::before {
+            background-color: #48dbfb; /* Whitewashed blue */
+        }
+        
+        .project-card:nth-child(3)::before {
+            background-color: #1dd1a1; /* Whitewashed green */
+        }
+        
+        .project-card:nth-child(4)::before {
+            background-color: #feca57; /* Whitewashed yellow */
+        }
+        
+        .project-card:nth-child(5)::before {
+            background-color: #c8d6e5; /* Whitewashed gray */
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .project-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: #3a506b;
+        }
+        
+        .project-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .project-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .about {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            padding: 60px 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            margin-bottom: 60px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-content {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .about-content h2 {
+            margin-bottom: 20px;
+            color: #3a506b;
+            font-size: 2rem;
+        }
+        
+        .about-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .skill-tag {
+            padding: 8px 15px;
+            background-color: rgba(108, 99, 255, 0.1);
+            color: #6c63ff;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .footer {
+            background-color: #3a506b;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #c3cfe2;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .about {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="logo">Aswin</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="header">
+        <h1>Hi, I'm Aswin</h1>
+        <p>Student at Vellore Institute of Technology</p>
+        <a href="#projects" class="header-btn">View My Work</a>
+    </header>
+
+    <section id="about" class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about">
+            <!-- <div class="about-image">
+                <img src="/api/placeholder/400/400" alt="Aswin's Profile">
+            </div> -->
+            <div class="about-content">
+                <h2>Student & Developer</h2>
+                <p>Hello! I'm Aswin, a student at Vellore Institute of Technology with a passion for creating innovative web applications and solving complex problems.</p>
+                <p>Currently pursuing my degree in Computer Science, I focus on developing projects that combine creativity with technical skills to create meaningful solutions.</p>
+                <p>When I'm not coding or studying, you can find me exploring new technologies, participating in hackathons, or contributing to open-source projects.</p>
+                <div class="skills">
+                    <div class="skill-tag">HTML/CSS</div>
+                    <div class="skill-tag">JavaScript</div>
+                    <div class="skill-tag">GSAP Animation</div>
+                    <div class="skill-tag">Web Development</div>
+                    <div class="skill-tag">UI/UX Design</div>
+                    <div class="skill-tag">Problem Solving</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects">
+            <div class="project-card" onclick="openProject('chart-generator.html')">
+                <h3>Chart Generator</h3>
+                <p>A dynamic tool that generates customizable charts for data visualization projects.</p>
+                <div class="project-icon">📊</div>
+            </div>
+            <div class="project-card" onclick="openProject('light-dark-mode.html')">
+                <h3>Light & Dark Mode</h3>
+                <p>A theme switcher implementation with smooth transitions between light and dark modes.</p>
+                <div class="project-icon">🌓</div>
+            </div>
+            <div class="project-card" onclick="openProject('password-generator.html')">
+                <h3>Password Generator</h3>
+                <p>Creates secure, customizable passwords with options for length and character types.</p>
+                <div class="project-icon">🔐</div>
+            </div>
+            <div class="project-card" onclick="openProject('password-strength.html')">
+                <h3>Password Strength Checker</h3>
+                <p>Evaluates password security and provides recommendations for improvements.</p>
+                <div class="project-icon">🛡️</div>
+            </div>
+            <div class="project-card" onclick="openProject('ping-pong-game.html')">
+                <h3>Ping Pong Game</h3>
+                <p>A fun, interactive browser-based ping pong game with different difficulty levels.</p>
+                <div class="project-icon">🏓</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+            <p style="margin-bottom: 30px; color: #555;">Have a question or want to work together? Feel free to reach out!</p>
+            <a href="mailto:aswin@example.com" class="header-btn">Contact Me</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="social-links">
+            <a href="#" title="GitHub">GitHub</a>
+            <a href="#" title="LinkedIn">LinkedIn</a>
+            <a href="#" title="Twitter">Twitter</a>
+        </div>
+        <p class="copyright">© 2025 Aswin. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        function openProject(url) {
+            window.location.href = url;
+        }
+        
+        // Animation with GSAP
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate header elements
+            gsap.from('.header h1', {
+                duration: 1,
+                y: -50,
+                opacity: 0,
+                ease: 'power3.out'
+            });
+            
+            gsap.from('.header p', {
+                duration: 1,
+                y: -30,
+                opacity: 0,
+                ease: 'power3.out',
+                delay: 0.3
+            });
+            
+            gsap.from('.header-btn', {
+                duration: 1,
+                y: -20,
+                opacity: 0,
+                ease: 'power3.out',
+                delay: 0.6
+            });
+            
+            // Animate project cards on scroll
+            gsap.from('.project-card', {
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                stagger: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.projects',
+                    start: 'top 80%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
